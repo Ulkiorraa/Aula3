@@ -1,6 +1,7 @@
 module br.com.ulkiorra {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens br.com.ulkiorra to javafx.fxml;

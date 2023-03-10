@@ -8,3 +8,5 @@
 /dataSources.local.xml
 # CodeStream ignored files
 /../../Aula3\.idea/codestream.xml
+/git_toolbox_prj.xml
+/sqldialects.xml
