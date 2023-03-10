@@ -8,7 +8,7 @@ import java.util.Optional;
 
 //define todos os métodos que AlunoDAO possuirá
 public interface IAlunoDAO {
-    Aluno create(Aluno aluno);
+    boolean create(Aluno aluno);
     Aluno update(Aluno aluno);
     void delete(Long matricula);
     List<Aluno> findAll();

@@ -13,7 +13,7 @@ import java.util.Optional;
 public class AlunoDAO implements IAlunoDAO {
 
     @Override
-    public Aluno create(Aluno aluno) {
+    public boolean create(Aluno aluno) {
         try (Connection connection = ConnectionFactory.getConnection()) {
             String query = "INSERT INTO Alunos" + "(nome, maioridade, curso, sexo)" + "VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -22,10 +22,10 @@ public class AlunoDAO implements IAlunoDAO {
             statement.setString(3, aluno.getCurso().toString());
             statement.setString(4, aluno.getSexo());
             statement.executeUpdate();
+            return true;
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
-        return aluno;
     }
 
     @Override
