@@ -36,5 +36,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/.idea/dataSources.xml
 /src/main/java/br/com/ulkiorra/config/db.properties
+.idea
