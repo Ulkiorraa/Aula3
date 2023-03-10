@@ -9,29 +9,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="274.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.ulkiorra.controllers.LoginController">
-   <content>
-      <VBox prefHeight="272.0" prefWidth="411.0">
-         <children>
-            <AnchorPane prefHeight="274.0" prefWidth="411.0">
-               <children>
-                  <Label layoutX="182.0" layoutY="50.0" text="Login">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="173.0" layoutY="123.0" text="Password">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="txt_login" layoutX="109.0" layoutY="88.0" prefHeight="25.0" prefWidth="208.0" />
-                  <PasswordField fx:id="txt_pass" layoutX="109.0" layoutY="150.0" prefHeight="25.0" prefWidth="208.0" />
-                  <Button fx:id="btn_log" layoutX="169.0" layoutY="201.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="89.0" text="Login" />
-               </children>
-            </AnchorPane>
-         </children>
-      </VBox>
-   </content>
+<ScrollPane fx:id="tela_login" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="274.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="br.com.ulkiorra.controllers.LoginController">
+    <VBox prefHeight="272.0" prefWidth="411.0">
+        <AnchorPane prefHeight="274.0" prefWidth="411.0" style="-fx-background-color: #87cefa;">
+            <Label layoutX="182.0" layoutY="50.0" text="Login">
+                <font>
+                    <Font name="System Bold" size="18.0"/>
+                </font>
+            </Label>
+            <Label layoutX="173.0" layoutY="123.0" text="Password">
+                <font>
+                    <Font name="System Bold" size="18.0"/>
+                </font>
+            </Label>
+            <TextField fx:id="txt_login" layoutX="109.0" layoutY="88.0" prefHeight="25.0" prefWidth="208.0"/>
+            <PasswordField fx:id="txt_pass" layoutX="109.0" layoutY="150.0" prefHeight="25.0" prefWidth="208.0"/>
+            <Button fx:id="btn_log" layoutX="169.0" layoutY="201.0" mnemonicParsing="false" prefHeight="39.0"
+                    prefWidth="89.0" text="Login"/>
+        </AnchorPane>
+    </VBox>
 </ScrollPane>

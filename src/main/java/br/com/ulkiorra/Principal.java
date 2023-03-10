@@ -1,8 +1,5 @@
 package br.com.ulkiorra;
 
-import br.com.ulkiorra.dao.AlunoDAO;
-import br.com.ulkiorra.model.Aluno;
-import br.com.ulkiorra.model.Cursos;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,14 +13,12 @@ public class Principal extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Principal.class.getResource("view/loginView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Login");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-        AlunoDAO alunoDAO = new AlunoDAO();
-        Aluno aluno = new Aluno("Goten dos Santos", false, Cursos.OUTROS, "masculino");
-        alunoDAO.create(aluno);
         launch();
     }
 }

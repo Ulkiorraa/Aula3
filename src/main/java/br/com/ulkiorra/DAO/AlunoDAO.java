@@ -1,4 +1,4 @@
-package br.com.ulkiorra.dao;
+package br.com.ulkiorra.DAO;
 
 import br.com.ulkiorra.config.ConnectionFactory;
 import br.com.ulkiorra.model.Aluno;
