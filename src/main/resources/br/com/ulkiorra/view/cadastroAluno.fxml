@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="window_cad" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="250.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            prefHeight="250.0" prefWidth="600.0" style="-fx-background-color: #87cefa;"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="br.com.ulkiorra.controllers.CadastroController">
     <Label layoutX="44.0" layoutY="57.0" text="Nome:">
         <font>
@@ -29,7 +29,8 @@
         </font>
     </Label>
     <TextField fx:id="txt_nome" layoutX="101.0" layoutY="55.0" prefHeight="25.0" prefWidth="323.0"/>
-    <ComboBox fx:id="txt_curso" layoutX="101.0" layoutY="91.0" prefHeight="25.0" prefWidth="323.0"/>
+    <ComboBox fx:id="txt_curso" layoutX="101.0" layoutY="91.0" prefHeight="25.0" prefWidth="323.0"
+              promptText="Selecione"/>
     <CheckBox fx:id="bol_maioridade" layoutX="442.0" layoutY="59.0" mnemonicParsing="false" text="Maior de idade">
         <font>
             <Font name="System Bold" size="14.0"/>
