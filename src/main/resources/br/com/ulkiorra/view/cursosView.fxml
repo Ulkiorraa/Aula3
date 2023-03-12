@@ -26,13 +26,13 @@
         </Label>
         <ToolBar prefHeight="40.0" prefWidth="200.0">
             <items>
-                <Button mnemonicParsing="false" text="New"/>
+                <Button fx:id="btn_new" mnemonicParsing="false" onAction="#onActionNew" text="New"/>
             </items>
         </ToolBar>
-        <TableView prefHeight="200.0" prefWidth="200.0">
+        <TableView fx:id="table_view" prefHeight="200.0" prefWidth="200.0">
             <columns>
-                <TableColumn prefWidth="105.0" text="Id"/>
-                <TableColumn prefWidth="105.0" text="Nome"/>
+                <TableColumn fx:id="collum_id" prefWidth="105.0" text="Id"/>
+                <TableColumn fx:id="collum_name" prefWidth="105.0" text="Nome"/>
             </columns>
         </TableView>
     </children>
