@@ -72,11 +72,11 @@ public class CadastroController {
         Cursos curso = txt_curso.getValue();
 
         if (nome.isEmpty()) {
-            alerts.mostrarMensagemDeErro("Nome é um campo obrigatório.");
+            alerts.mostrarMensagemDeErro("Erro", null, "Nome é um campo obrigatório.");
             return;
         }
         if (curso == null) {
-            alerts.mostrarMensagemDeErro("Curso é um campo obrigatório.");
+            alerts.mostrarMensagemDeErro("Erro", null, "Curso é um campo obrigatório.");
             return;
         }
 
@@ -85,7 +85,7 @@ public class CadastroController {
         } else if (txt_feminino.isSelected()) {
             sexo = "feminino";
         } else {
-            alerts.mostrarMensagemDeErro("Selecione o sexo.");
+            alerts.mostrarMensagemDeErro("Erro", null, "Sexo é um campo obrigatório.");
             return;
         }
 
@@ -95,11 +95,11 @@ public class CadastroController {
         aluno.setCurso(curso);
         aluno.setSexo(sexo);
 
-        boolean cadastradoComSucesso = alunoDAO.create(aluno);
-        if (cadastradoComSucesso) {
-            alerts.mostrarMensagem("Cadastro bem sucedido!");
+        Aluno cadastradoComSucesso = alunoDAO.create(aluno);
+        if (cadastradoComSucesso != null) {
+            alerts.mostrarMensagemDeErro("Information", null, "Cadastro bem sucedido!");
         } else {
-            alerts.mostrarMensagemDeErro("Cadastro falhou.");
+            alerts.mostrarMensagemDeErro("Erro", null, "Cadastro falhou!");
         }
     }
 }

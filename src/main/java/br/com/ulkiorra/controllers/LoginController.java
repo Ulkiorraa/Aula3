@@ -32,37 +32,45 @@ public class LoginController {
     @FXML
     private PasswordField txt_pass;
 
-    public void initialize(){
+    public void initialize() {
         btn_log.setOnAction(event -> sysLogin());
     }
 
-    private void sysLogin(){
+    private static Scene newScene;
+
+    private void sysLogin() {
         Alerts alerts = new Alerts();
-        try (Connection connection = ConnectionFactory.getConnection()){
+        try (Connection connection = ConnectionFactory.getConnection()) {
             String query = "SELECT *FROM usuario WHERE nome_usuario = ? AND senha_usuario = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, txt_login.getText());
             statement.setString(2, txt_pass.getText());
             ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(Principal.class.getResource("view/cadastroAluno.fxml"));
-                    Scene newScene = new Scene(fxmlLoader.load());
+                    FXMLLoader fxmlLoader = new FXMLLoader(Principal.class.getResource("view/principalPainel.fxml"));
+                    ScrollPane scrollPane = fxmlLoader.load();
+                    scrollPane.setFitToHeight(true);
+                    scrollPane.setFitToWidth(true);
+                    newScene = new Scene(scrollPane);
                     Stage newStage = new Stage();
-                    newStage.setResizable(false);
                     newStage.setTitle("Cadastro de Aluno");
                     newStage.setScene(newScene);
                     newStage.show();
                     Stage Login_window = (Stage) tela_login.getScene().getWindow();
                     Login_window.close();
-                }catch (IOException e){
-                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    alerts.mostrarMensagemDeErro("Erro ao Carregar tela!", "Tela Principal não carregada!", e.getMessage());
                 }
-            }else {
-                alerts.mostrarMensagemDeErro("Usuario ou Senha incorretos!");
+            } else {
+                alerts.mostrarMensagemDeErro("Erro ao Carregar tela!", null, "Usuário ou Senha incorretos!");
             }
-        }catch (SQLException e){
-            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            alerts.mostrarMensagemDeErro("Erro recupera login BD", "Erro ao acessar BD para pegar informações de login", e.getMessage());
         }
+    }
+
+    public static Scene getMainScene(){
+        return  newScene;
     }
 }

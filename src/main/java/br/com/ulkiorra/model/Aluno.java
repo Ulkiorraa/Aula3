@@ -10,11 +10,16 @@ public class Aluno {
     public Aluno() {
     }
 
-    public Aluno(String nome, boolean maioridade, Cursos curso, String sexo) {
+    public Aluno(Long matricula, String nome, boolean maioridade, Cursos curso, String sexo) {
+        this.matricula = matricula;
         this.nome = nome;
         this.maioridade = maioridade;
         this.curso = curso;
         this.sexo = sexo;
+    }
+
+    public void setMatricula(Long matricula) {
+        this.matricula = matricula;
     }
 
     public Long getMatricula() {

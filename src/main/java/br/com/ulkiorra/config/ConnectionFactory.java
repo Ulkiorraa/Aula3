@@ -1,5 +1,7 @@
 package br.com.ulkiorra.config;
 
+import br.com.ulkiorra.util.Alerts;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,6 +10,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionFactory {
+
+    Alerts alerts = new Alerts();
 
     public static Connection getConnection() {
         try {
