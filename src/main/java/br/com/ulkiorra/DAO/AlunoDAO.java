@@ -14,7 +14,7 @@ public class AlunoDAO implements IAlunoDAO {
     @Override
     public Aluno create(Aluno aluno) {
         try (Connection connection = ConnectionFactory.getConnection()) {
-            String query = "INSERT INTO Alunos" + "(nome, maioridade, curso, sexo)" + "VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO alunos" + "(nome, maioridade, curso, sexo)" + "VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, aluno.getNome());
             statement.setBoolean(2, aluno.isMaioridade());
@@ -33,12 +33,31 @@ public class AlunoDAO implements IAlunoDAO {
 
     @Override
     public Aluno update(Aluno aluno) {
-        return null;
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String query = "UPDATE alunos SET " + "nome = ?, maioridade = ?, curso = ?, sexo = ?" + "WHERE matricula = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, aluno.getNome());
+            statement.setBoolean(2, aluno.isMaioridade());
+            statement.setString(3, aluno.getCurso().toString());
+            statement.setString(4, aluno.getSexo());
+            statement.setLong(5, aluno.getMatricula());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return aluno;
     }
 
     @Override
     public void delete(Long matricula) {
-
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String query = "DELETE FROM alunos WHERE matricula =?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1, matricula);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

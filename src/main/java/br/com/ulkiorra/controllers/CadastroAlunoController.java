@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CadastroController {
+public class CadastroAlunoController {
 
     @FXML
     private CheckBox bol_maioridade;

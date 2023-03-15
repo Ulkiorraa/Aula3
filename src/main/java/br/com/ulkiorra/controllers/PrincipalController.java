@@ -27,10 +27,7 @@ public class PrincipalController implements Initializable {
     private MenuItem menuItemAbout;
 
     @FXML
-    void onMenuItemAlunoAction() {
-        System.out.println("teste");
-
-    }
+    void onMenuItemAlunoAction() { loadView("view/alunoView.fxml"); }
 
     @FXML
     void onMenuItemCursoAction() {
@@ -43,11 +40,11 @@ public class PrincipalController implements Initializable {
     }
 
     @Override
-    public  void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url, ResourceBundle rb) {
 
     }
 
-    private synchronized void loadView(String absolutName){
+    private synchronized void loadView(String absolutName) {
         try {
             FXMLLoader loader = new FXMLLoader(Principal.class.getResource(absolutName));
             VBox newVbox = loader.load();
@@ -57,8 +54,8 @@ public class PrincipalController implements Initializable {
             mainVbox.getChildren().clear();
             mainVbox.getChildren().add(mainMenu);
             mainVbox.getChildren().addAll(newVbox.getChildren());
-        }catch (IOException e){
-            Alerts alerts =new Alerts();
+        } catch (IOException e) {
+            Alerts alerts = new Alerts();
             alerts.mostrarMensagemDeErro("Erro ao carregar tela!", "Erro ao carregar tela About", e.getMessage());
         }
     }

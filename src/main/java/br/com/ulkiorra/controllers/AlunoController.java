@@ -1,7 +1,7 @@
 package br.com.ulkiorra.controllers;
 
 import br.com.ulkiorra.Principal;
-import br.com.ulkiorra.model.Cursos;
+import br.com.ulkiorra.model.Aluno;
 import br.com.ulkiorra.util.Alerts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,33 +17,33 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CursoController implements Initializable {
+public class AlunoController implements Initializable {
 
     @FXML
     private Button btn_new;
 
     @FXML
-    private TableColumn<Cursos, Integer> collum_id;
+    private TableColumn<Aluno, Integer> collum_id;
 
     @FXML
-    private TableColumn<Cursos, String> collum_name;
+    private TableColumn<Aluno, String> collum_name;
 
     @FXML
-    private TableView<Cursos> table_view;
+    private TableView<Aluno> table_view;
 
     @FXML
     void onActionNew() {
         Alerts alerts = new Alerts();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Principal.class.getResource("view/cadastroCurso.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Principal.class.getResource("view/cadastroAluno.fxml"));
             Scene newScene = new Scene(fxmlLoader.load());
             Stage newStage = new Stage();
             newStage.setResizable(false);
-            newStage.setTitle("Cadastro de Curso");
+            newStage.setTitle("Cadastro de Aluno");
             newStage.setScene(newScene);
             newStage.show();
         } catch (IOException e) {
-            alerts.mostrarMensagemDeErro("Erro ao Carregar tela!", "Tela de cadastro de curso não carregada!", e.getMessage());
+            alerts.mostrarMensagemDeErro("Erro ao Carregar tela!", "Tela de cadastro de aluno não carregada!", e.getMessage());
         }
     }
 
