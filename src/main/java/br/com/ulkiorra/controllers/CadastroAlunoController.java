@@ -1,14 +1,14 @@
 package br.com.ulkiorra.controllers;
 
 import br.com.ulkiorra.DAO.AlunoDAO;
+import br.com.ulkiorra.DAO.CursoDAO;
 import br.com.ulkiorra.model.Aluno;
-import br.com.ulkiorra.model.Cursos;
+import br.com.ulkiorra.model.Curso;
 import br.com.ulkiorra.util.Alerts;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CadastroAlunoController {
@@ -20,7 +20,7 @@ public class CadastroAlunoController {
     private Button btn_cadastrar;
 
     @FXML
-    private ComboBox<Cursos> txt_curso;
+    private ComboBox<String> txt_curso;
 
     @FXML
     private RadioButton txt_feminino;
@@ -51,13 +51,10 @@ public class CadastroAlunoController {
         txt_masculino.setToggleGroup(sexoToggleGroup);
         txt_feminino.setToggleGroup(sexoToggleGroup);
 
-        List<Cursos> opList = new ArrayList<>();
-        opList.add(Cursos.ADS);
-        opList.add(Cursos.CCMP);
-        opList.add(Cursos.ECMP);
-        opList.add(Cursos.OUTROS);
-        for (Cursos e : opList) {
-            txt_curso.getItems().add(e);
+        CursoDAO cursoDAO = new CursoDAO();
+        List<Curso> opList = cursoDAO.findAll();
+        for (Curso e : opList) {
+            txt_curso.getItems().add(e.getNome());
         }
 
         btn_cadastrar.setOnAction(event -> sysCadastro());
@@ -69,7 +66,7 @@ public class CadastroAlunoController {
         String nome = txt_nome.getText().trim();
         boolean maioridade = bol_maioridade.isSelected();
         String sexo;
-        Cursos curso = txt_curso.getValue();
+        String curso = txt_curso.getValue();
 
         if (nome.isEmpty()) {
             alerts.mostrarMensagemDeErro("Erro", null, "Nome é um campo obrigatório.");
@@ -97,7 +94,7 @@ public class CadastroAlunoController {
 
         Aluno cadastradoComSucesso = alunoDAO.create(aluno);
         if (cadastradoComSucesso != null) {
-            alerts.mostrarMensagemDeErro("Information", null, "Cadastro bem sucedido!");
+            alerts.mostrarMensagem("Information", null, "Cadastro bem sucedido!");
         } else {
             alerts.mostrarMensagemDeErro("Erro", null, "Cadastro falhou!");
         }

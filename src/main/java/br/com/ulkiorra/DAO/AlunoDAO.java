@@ -14,12 +14,19 @@ public class AlunoDAO implements IAlunoDAO {
     @Override
     public Aluno create(Aluno aluno) {
         try (Connection connection = ConnectionFactory.getConnection()) {
-            String query = "INSERT INTO alunos" + "(nome, maioridade, curso, sexo)" + "VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO alunos" + "(nome, maioridade, curso, sexo, curso_sigla)" + "VALUES (?, ?, ?, ?, ?)";
+            String query2 = "SELECT sigla FROM curso WHERE nome = ?";
             PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement2 = connection.prepareStatement(query2);
+            statement2.setString(1, aluno.getCurso());
+            ResultSet resultSet2 = statement2.executeQuery();
+            resultSet2.next();
+            String sigla = resultSet2.getString("sigla");
             statement.setString(1, aluno.getNome());
             statement.setBoolean(2, aluno.isMaioridade());
-            statement.setString(3, aluno.getCurso().toString());
+            statement.setString(3, aluno.getCurso());
             statement.setString(4, aluno.getSexo());
+            statement.setString(5, sigla);
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
@@ -38,7 +45,7 @@ public class AlunoDAO implements IAlunoDAO {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, aluno.getNome());
             statement.setBoolean(2, aluno.isMaioridade());
-            statement.setString(3, aluno.getCurso().toString());
+            statement.setString(3, aluno.getCurso());
             statement.setString(4, aluno.getSexo());
             statement.setLong(5, aluno.getMatricula());
             statement.executeUpdate();
@@ -73,7 +80,7 @@ public class AlunoDAO implements IAlunoDAO {
                 aluno.setMatricula(resultSet.getLong("matricula"));
                 aluno.setNome(resultSet.getString("nome"));
                 aluno.setMaioridade(resultSet.getBoolean("maioridade"));
-                aluno.setCurso(Cursos.valueOf(resultSet.getString("curso")));
+                aluno.setCurso(resultSet.getString("curso"));
                 aluno.setSexo(resultSet.getString("sexo"));
                 list.add(aluno);
             }
@@ -97,7 +104,7 @@ public class AlunoDAO implements IAlunoDAO {
                         resultSet.getLong("matricula"),
                         resultSet.getString("nome"),
                         resultSet.getBoolean("maioridade"),
-                        Cursos.valueOf(resultSet.getString("curso")),
+                        resultSet.getString("curso"),
                         resultSet.getString("sexo")
                 );
             }
@@ -121,7 +128,7 @@ public class AlunoDAO implements IAlunoDAO {
                         resultSet.getLong("matricula"),
                         resultSet.getString("nome"),
                         resultSet.getBoolean("maioridade"),
-                        Cursos.valueOf(resultSet.getString("curso")),
+                        resultSet.getString("curso"),
                         resultSet.getString("sexo")
                 );
                 list.add(aluno);

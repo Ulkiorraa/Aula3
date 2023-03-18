@@ -5,6 +5,7 @@ import br.com.ulkiorra.model.Areas;
 import br.com.ulkiorra.model.Curso;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,7 +52,24 @@ public class CursoDAO implements ICursoDAO {
 
     @Override
     public List<Curso> findAll() {
-        return null;
+        String query = "SELECT * FROM curso";
+        List<Curso> list = new ArrayList<>();
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Curso curso = new Curso();
+                curso.setCodigo(resultSet.getLong("codigo"));
+                curso.setNome(resultSet.getString("nome"));
+                curso.setSigla(resultSet.getString("sigla"));
+                curso.setArea(Areas.valueOf(resultSet.getString("area")));
+                list.add(curso);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
     }
 
     @Override

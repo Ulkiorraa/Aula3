@@ -4,13 +4,13 @@ public class Aluno {
     private Long matricula;
     private String nome;
     private boolean maioridade;
-    private Cursos curso;
+    private String curso;
     private String sexo;
 
     public Aluno() {
     }
 
-    public Aluno(Long matricula, String nome, boolean maioridade, Cursos curso, String sexo) {
+    public Aluno(Long matricula, String nome, boolean maioridade, String curso, String sexo) {
         this.matricula = matricula;
         this.nome = nome;
         this.maioridade = maioridade;
@@ -42,11 +42,11 @@ public class Aluno {
         this.maioridade = maioridade;
     }
 
-    public Cursos getCurso() {
+    public String getCurso() {
         return curso;
     }
 
-    public void setCurso(Cursos curso) {
+    public void setCurso(String curso) {
         this.curso = curso;
     }
 

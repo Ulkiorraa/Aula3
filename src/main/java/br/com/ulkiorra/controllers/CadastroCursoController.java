@@ -95,7 +95,7 @@ public class CadastroCursoController {
 
         Curso cadastradoComSucesso = cursoDAO.create(curso);
         if (cadastradoComSucesso != null) {
-            alerts.mostrarMensagemDeErro("Information", null, "Cadastro bem sucedido!");
+            alerts.mostrarMensagem("Information", null, "Cadastro bem sucedido!");
         } else {
             alerts.mostrarMensagemDeErro("Erro", null, "Cadastro falhou!");
         }
