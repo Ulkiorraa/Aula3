@@ -9,30 +9,30 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0"
-      prefWidth="520.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="br.com.ulkiorra.controllers.CursoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.ulkiorra.controllers.CursoController">
     <children>
         <Label text="Registro de Cursos">
             <font>
-                <Font name="System Bold" size="15.0"/>
+                <Font name="System Bold" size="15.0" />
             </font>
             <opaqueInsets>
-                <Insets/>
+                <Insets />
             </opaqueInsets>
             <padding>
-                <Insets left="5.0" top="5.0"/>
+                <Insets left="5.0" top="5.0" />
             </padding>
         </Label>
         <ToolBar prefHeight="40.0" prefWidth="200.0">
             <items>
-                <Button fx:id="btn_new" mnemonicParsing="false" onAction="#onActionNew" text="New"/>
+                <Button fx:id="btn_new" mnemonicParsing="false" onAction="#onActionNew" text="New" />
             </items>
         </ToolBar>
         <TableView fx:id="table_view" prefHeight="200.0" prefWidth="200.0">
             <columns>
-                <TableColumn fx:id="collum_id" prefWidth="105.0" text="Id"/>
-                <TableColumn fx:id="collum_name" prefWidth="105.0" text="Nome"/>
+                <TableColumn fx:id="collum_id" prefWidth="105.0" text="Codigo" />
+                <TableColumn fx:id="collum_name" prefWidth="105.0" text="Nome" />
+            <TableColumn fx:id="collum_sigla" prefWidth="90.0" text="Sigla" />
+            <TableColumn fx:id="collum_area" prefWidth="92.0" text="Area" />
             </columns>
         </TableView>
     </children>

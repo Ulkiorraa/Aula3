@@ -1,9 +1,12 @@
 package br.com.ulkiorra.controllers;
 
 import br.com.ulkiorra.DAO.CursoDAO;
+import br.com.ulkiorra.listeners.DataChangeListener;
 import br.com.ulkiorra.model.Areas;
 import br.com.ulkiorra.model.Curso;
 import br.com.ulkiorra.util.Alerts;
+import br.com.ulkiorra.util.Utils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -15,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CadastroCursoController {
+
+    private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 
     @FXML
     private Button btn_cadastrar;
@@ -30,6 +35,10 @@ public class CadastroCursoController {
 
     @FXML
     private AnchorPane window_cad;
+
+    public void subscribeDataChangeListener(DataChangeListener listner){
+        dataChangeListeners.add(listner);
+    }
 
     public void initialize(){
         TextFormatter<String> noNumbersFormatter = new TextFormatter<>(change -> {
@@ -65,14 +74,14 @@ public class CadastroCursoController {
             txt_area.getItems().add(e);
         }
 
-        btn_cadastrar.setOnAction(event -> sysCadastro());
+        btn_cadastrar.setOnAction(this::sysCadastro);
     }
 
-    private void sysCadastro(){
+    private void sysCadastro(ActionEvent event){
         CursoDAO cursoDAO = new CursoDAO();
         Alerts alerts = new Alerts();
         String nome = txt_nome.getText().trim();
-        String sigla = txt_sigla.getText().trim();
+        String sigla = txt_sigla.getText().toUpperCase().trim();
         Areas area = txt_area.getValue();
 
         if (nome.isEmpty()) {
@@ -96,8 +105,16 @@ public class CadastroCursoController {
         Curso cadastradoComSucesso = cursoDAO.create(curso);
         if (cadastradoComSucesso != null) {
             alerts.mostrarMensagem("Information", null, "Cadastro bem sucedido!");
+            notifyDataChangeListeners();
         } else {
             alerts.mostrarMensagemDeErro("Erro", null, "Cadastro falhou!");
+        }
+        Utils.currentStage(event).close();
+    }
+
+    private void notifyDataChangeListeners() {
+        for (DataChangeListener listener : dataChangeListeners) {
+            listener.onDataChanged();
         }
     }
 }

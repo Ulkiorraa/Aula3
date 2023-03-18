@@ -1,7 +1,7 @@
 package br.com.ulkiorra.DAO;
 
 import br.com.ulkiorra.model.Aluno;
-import br.com.ulkiorra.model.Cursos;
+import br.com.ulkiorra.model.Curso;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,5 +16,5 @@ public interface IAlunoDAO {
     /*
     Com o Optional, se a matrícula não retorna nada, não dará erro!
      */
-    List<Aluno> findByCurso(Cursos curso);
+    List<Aluno> findByCurso(Curso curso);
 }

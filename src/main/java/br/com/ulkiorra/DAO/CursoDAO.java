@@ -3,6 +3,7 @@ package br.com.ulkiorra.DAO;
 import br.com.ulkiorra.config.ConnectionFactory;
 import br.com.ulkiorra.model.Areas;
 import br.com.ulkiorra.model.Curso;
+import br.com.ulkiorra.util.Alerts;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class CursoDAO implements ICursoDAO {
+    Alerts alerts = new Alerts();
+
     @Override
     public Curso create(Curso curso) {
         try (Connection connection = ConnectionFactory.getConnection()) {
@@ -23,10 +26,11 @@ public class CursoDAO implements ICursoDAO {
             resultSet.next();
             Long codigoGerado = resultSet.getLong(1);
             curso.setCodigo(codigoGerado);
+            return curso;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            alerts.mostrarMensagemDeErro("Erro de Criação!", null, e.getMessage());
         }
-        return curso;
+        return null;
     }
 
     @Override
@@ -39,10 +43,11 @@ public class CursoDAO implements ICursoDAO {
             statement.setString(3, curso.getArea().toString());
             statement.setLong(4, curso.getCodigo());
             statement.executeUpdate();
+            return curso;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            alerts.mostrarMensagemDeErro("Erro de Update!", null, e.getMessage());
         }
-        return curso;
+        return null;
     }
 
     @Override
@@ -66,10 +71,11 @@ public class CursoDAO implements ICursoDAO {
                 curso.setArea(Areas.valueOf(resultSet.getString("area")));
                 list.add(curso);
             }
+            return list;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            alerts.mostrarMensagemDeErro("Erro de FindAll!", null, e.getMessage());
         }
-        return list;
+        return null;
     }
 
     @Override

@@ -2,7 +2,7 @@ package br.com.ulkiorra.DAO;
 
 import br.com.ulkiorra.config.ConnectionFactory;
 import br.com.ulkiorra.model.Aluno;
-import br.com.ulkiorra.model.Cursos;
+import br.com.ulkiorra.model.Curso;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -115,12 +115,12 @@ public class AlunoDAO implements IAlunoDAO {
     }
 
     @Override
-    public List<Aluno> findByCurso(Cursos curso) {
-        String query = "SELECT * FROM alunos WHERE curso = ?";
+    public List<Aluno> findByCurso(Curso curso) {
+        String query = "SELECT * FROM alunos WHERE curso_sigla = ?";
         List<Aluno> list = new ArrayList<>();
         try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, String.valueOf(curso));
+            statement.setString(1, curso.getSigla());
             statement.executeQuery();
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
