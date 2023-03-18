@@ -33,6 +33,7 @@
                 <TableColumn fx:id="collum_name" prefWidth="105.0" text="Nome" />
             <TableColumn fx:id="collum_sigla" prefWidth="90.0" text="Sigla" />
             <TableColumn fx:id="collum_area" prefWidth="92.0" text="Area" />
+            <TableColumn fx:id="tableColumEDIT" prefWidth="75.0" />
             </columns>
         </TableView>
     </children>

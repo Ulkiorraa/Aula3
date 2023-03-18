@@ -16,12 +16,17 @@ import javafx.scene.control.TextFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CadastroCursoController {
+public class UpdateCursoController {
+
+    private Curso entity;
 
     private final List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 
     @FXML
-    private Button btn_cadastrar;
+    private Button btn_update;
+
+    @FXML
+    private TextField txt_codigo;
 
     @FXML
     private ComboBox<Areas> txt_area;
@@ -31,6 +36,10 @@ public class CadastroCursoController {
 
     @FXML
     private TextField txt_sigla;
+
+    public void setCurso(Curso entity){
+        this.entity = entity;
+    }
 
     public void subscribeDataChangeListener(DataChangeListener listner){
         dataChangeListeners.add(listner);
@@ -70,12 +79,14 @@ public class CadastroCursoController {
             txt_area.getItems().add(e);
         }
 
-        btn_cadastrar.setOnAction(this::sysCadastro);
+        btn_update.setOnAction(this::sysUpdate);
     }
 
-    private void sysCadastro(ActionEvent event){
+    private void sysUpdate(ActionEvent event){
         CursoDAO cursoDAO = new CursoDAO();
         Alerts alerts = new Alerts();
+        String id = txt_codigo.getText().trim();
+        Long codigo = Long.parseLong(id);
         String nome = txt_nome.getText().trim();
         String sigla = txt_sigla.getText().toUpperCase().trim();
         Areas area = txt_area.getValue();
@@ -94,18 +105,26 @@ public class CadastroCursoController {
         }
 
         Curso curso = new Curso();
+        curso.setCodigo(codigo);
         curso.setNome(nome);
         curso.setSigla(sigla);
         curso.setArea(area);
 
-        Curso cadastradoComSucesso = cursoDAO.create(curso);
+        Curso cadastradoComSucesso = cursoDAO.update(curso);
         if (cadastradoComSucesso != null) {
-            alerts.mostrarMensagem("Information", null, "Cadastro bem sucedido!");
+            alerts.mostrarMensagem("Information", null, "Update bem sucedido!");
             notifyDataChangeListeners();
         } else {
-            alerts.mostrarMensagemDeErro("Erro", null, "Cadastro falhou!");
+            alerts.mostrarMensagemDeErro("Erro", null, "Update falhou!");
         }
         Utils.currentStage(event).close();
+    }
+
+    public void updateFormData(){
+        txt_codigo.setText(String.valueOf(entity.getCodigo()));
+        txt_nome.setText(entity.getNome());
+        txt_sigla.setText(entity.getSigla());
+        txt_area.setValue(entity.getArea());
     }
 
     private void notifyDataChangeListeners() {

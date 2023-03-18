@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
@@ -18,15 +17,6 @@ import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
 public class PrincipalController implements Initializable {
-
-    @FXML
-    private MenuItem menuItemAluno;
-
-    @FXML
-    private MenuItem menuItemCurso;
-
-    @FXML
-    private MenuItem menuItemAbout;
 
     @FXML
     void onMenuItemAlunoAction() { loadView("view/alunoView.fxml", x -> {}); }

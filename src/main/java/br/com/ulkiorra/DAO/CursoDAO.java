@@ -80,7 +80,25 @@ public class CursoDAO implements ICursoDAO {
 
     @Override
     public Optional<Curso> findById(Long codigo) {
-        return Optional.empty();
+        String query = "SELECT * FROM curso WHERE codigo = ?";
+        Curso curso = null;
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1, codigo);
+            statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                curso = new Curso(
+                        resultSet.getLong("codigo"),
+                        resultSet.getString("nome"),
+                        resultSet.getString("sigla"),
+                        Areas.valueOf(resultSet.getString("area"))
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return Optional.ofNullable(curso);
     }
 
     @Override
