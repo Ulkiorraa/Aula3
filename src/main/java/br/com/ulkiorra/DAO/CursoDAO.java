@@ -1,6 +1,7 @@
 package br.com.ulkiorra.DAO;
 
 import br.com.ulkiorra.config.ConnectionFactory;
+import br.com.ulkiorra.model.Aluno;
 import br.com.ulkiorra.model.Areas;
 import br.com.ulkiorra.model.Curso;
 import br.com.ulkiorra.util.Alerts;
@@ -8,6 +9,7 @@ import br.com.ulkiorra.util.Alerts;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class CursoDAO implements ICursoDAO {
@@ -51,8 +53,23 @@ public class CursoDAO implements ICursoDAO {
     }
 
     @Override
-    public void delete(Long codigo) {
-
+    public void delete(Curso codigo) {
+        AlunoDAO alunoDAO = new AlunoDAO();
+        List<Aluno> list = alunoDAO.findAll();
+        for (Aluno a : list) {
+            if (Objects.equals(a.getCurso(), codigo.getNome())) {
+                alerts.mostrarMensagemDeErro("Erro!", "Aluno cadastrado no curso!", "Você tem ao menos um aluno cadastrado no curso o mesmo não pode ser deletado!");
+                return;
+            }
+        }
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String query = "DELETE FROM curso WHERE codigo =?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1, codigo.getCodigo());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

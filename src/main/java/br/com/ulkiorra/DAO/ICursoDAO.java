@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ICursoDAO {
     Curso create(Curso curso);
     Curso update(Curso curso);
-    void delete(Long codigo);
+    void delete(Curso codigo);
     List<Curso> findAll();
     Optional<Curso> findById(Long codigo);
     /*

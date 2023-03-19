@@ -15,10 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -27,6 +24,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CursoController implements Initializable, DataChangeListener {
@@ -50,6 +48,10 @@ public class CursoController implements Initializable, DataChangeListener {
 
     @FXML
     private TableColumn<Curso, Curso> tableColumEDIT;
+
+    @FXML
+    TableColumn<Curso, Curso> tableColumREMOVE;
+
 
     Alerts alerts = new Alerts();
 
@@ -82,6 +84,7 @@ public class CursoController implements Initializable, DataChangeListener {
         ObservableList<Curso> obsList = FXCollections.observableArrayList(list);
         table_view.setItems(obsList);
         initEditButtons();
+        initRemoveButtons();
     }
 
     private void createDialogorm(Stage parentStage) {
@@ -143,5 +146,30 @@ public class CursoController implements Initializable, DataChangeListener {
                 button.setOnAction(event -> createDialogormUpdate(obj, Utils.currentStage(event)));
             }
         });
+    }
+
+    private void initRemoveButtons() {
+        tableColumREMOVE.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        tableColumREMOVE.setCellFactory(param -> new TableCell<>() {
+            private final Button button = new Button("remove");
+            @Override
+            protected void updateItem(Curso obj, boolean empty) {
+                super.updateItem(obj, empty);
+                if (obj == null) {
+                    setGraphic(null);
+                    return;
+                }
+                setGraphic(button);
+                button.setOnAction(event -> removeEntity(obj));
+            }
+        });
+    }
+
+    private void removeEntity(Curso obj) {
+        Optional<ButtonType> result = alerts.showConfirmation("Confirmation", "Você tem certeza que deseja deletar?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            cursoDAO.delete(obj);
+            updateTableView();
+        }
     }
 }
