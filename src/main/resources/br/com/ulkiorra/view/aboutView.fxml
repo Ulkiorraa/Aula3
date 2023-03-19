@@ -7,20 +7,20 @@
 <?import javafx.scene.text.Text?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label contentDisplay="CENTER" prefHeight="77.0" prefWidth="747.0" text="About">
-         <padding>
-            <Insets bottom="30.0" left="350.0" right="300.0" top="20.0" />
-         </padding>
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testando a tela!" textAlignment="CENTER" wrappingWidth="771.7392578125">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Text>
-   </children>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0"
+      prefWidth="771.0" xmlns="http://javafx.com/javafx/17">
+   <Label contentDisplay="CENTER" prefHeight="77.0" prefWidth="747.0" text="About">
+      <padding>
+         <Insets bottom="30.0" left="350.0" right="300.0" top="20.0"/>
+      </padding>
+      <font>
+         <Font name="System Bold" size="18.0"/>
+      </font>
+   </Label>
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Testando a tela!" textAlignment="CENTER"
+         wrappingWidth="771.7392578125">
+      <font>
+         <Font size="21.0"/>
+      </font>
+   </Text>
 </VBox>

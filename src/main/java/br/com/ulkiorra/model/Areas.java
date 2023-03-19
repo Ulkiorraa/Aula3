@@ -4,5 +4,5 @@ public enum Areas {
     EXATAS,
     HUMANAS,
     BIOLOGICAS,
-    ARTES;
+    ARTES
 }

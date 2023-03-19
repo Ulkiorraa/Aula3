@@ -14,9 +14,14 @@ import javafx.scene.control.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CadastroAlunoController {
+public class UpdateAlunoController {
+
+    private Aluno entity;
 
     private final List<DataChangeListener> dataChangeListeners = new ArrayList<>();
+
+    @FXML
+    private TextField txt_matricula;
 
     @FXML
     private CheckBox bol_maioridade;
@@ -35,6 +40,10 @@ public class CadastroAlunoController {
 
     @FXML
     private TextField txt_nome;
+
+    public void setAluno(Aluno entity){
+        this.entity = entity;
+    }
 
     public void subscribeDataChangeListener(DataChangeListener listner){
         dataChangeListeners.add(listner);
@@ -69,6 +78,8 @@ public class CadastroAlunoController {
     private void sysCadastro(ActionEvent event){
         AlunoDAO alunoDAO = new AlunoDAO();
         Alerts alerts = new Alerts();
+        String id = txt_matricula.getText().trim();
+        Long matricula = Long.parseLong(id);
         String nome = txt_nome.getText().trim();
         boolean maioridade = bol_maioridade.isSelected();
         String sexo;
@@ -93,20 +104,34 @@ public class CadastroAlunoController {
         }
 
         Aluno aluno = new Aluno();
+        aluno.setMatricula(matricula);
         aluno.setNome(nome);
         aluno.setMaioridade(maioridade);
         aluno.setCurso(curso);
         aluno.setSexo(sexo);
 
-        Aluno cadastradoComSucesso = alunoDAO.create(aluno);
+        Aluno cadastradoComSucesso = alunoDAO.update(aluno);
         if (cadastradoComSucesso != null) {
-            alerts.mostrarMensagem("Information", null, "Cadastro bem sucedido!");
+            alerts.mostrarMensagem("Information", null, "Update bem sucedido!");
             notifyDataChangeListeners();
         } else {
-            alerts.mostrarMensagemDeErro("Erro", null, "Cadastro falhou!");
+            alerts.mostrarMensagemDeErro("Erro", null, "Update falhou!");
         }
 
         Utils.currentStage(event).close();
+    }
+
+    public void updateFormData(){
+        txt_matricula.setText(String.valueOf(entity.getMatricula()));
+        txt_nome.setText(entity.getNome());
+        bol_maioridade.setSelected(entity.isMaioridade());
+        txt_curso.setValue(entity.getCurso());
+        String sexo = entity.getSexo();
+        if(sexo.equals("masculino")){
+            txt_masculino.setSelected(true);
+        } else if (sexo.equals("feminino")) {
+            txt_feminino.setSelected(true);
+        }
     }
 
     private void notifyDataChangeListeners() {

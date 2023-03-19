@@ -10,30 +10,31 @@
 <?import javafx.scene.text.Font?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0"
-      prefWidth="520.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+      prefWidth="642.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="br.com.ulkiorra.controllers.AlunoController">
-    <children>
-        <Label text="Registro de Alunos">
-            <font>
-                <Font name="System Bold" size="15.0"/>
-            </font>
-            <opaqueInsets>
-                <Insets/>
-            </opaqueInsets>
-            <padding>
-                <Insets left="5.0" top="5.0"/>
-            </padding>
-        </Label>
-        <ToolBar prefHeight="40.0" prefWidth="200.0">
-            <items>
-                <Button fx:id="btn_new" mnemonicParsing="false" onAction="#onActionNew" text="New"/>
-            </items>
-        </ToolBar>
-        <TableView fx:id="table_view" prefHeight="200.0" prefWidth="200.0">
-            <columns>
-                <TableColumn fx:id="collum_id" prefWidth="105.0" text="Id"/>
-                <TableColumn fx:id="collum_name" prefWidth="105.0" text="Nome"/>
-            </columns>
-        </TableView>
-    </children>
+    <Label text="Registro de Alunos">
+        <font>
+            <Font name="System Bold" size="15.0"/>
+        </font>
+        <opaqueInsets>
+            <Insets/>
+        </opaqueInsets>
+        <padding>
+            <Insets left="5.0" top="5.0"/>
+        </padding>
+    </Label>
+    <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <Button mnemonicParsing="false" onAction="#onActionNew" text="New"/>
+    </ToolBar>
+    <TableView fx:id="table_view" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+            <TableColumn fx:id="collum_id" prefWidth="48.0" text="Id"/>
+            <TableColumn fx:id="collum_name" prefWidth="130.0" text="Nome"/>
+            <TableColumn fx:id="colum_maioridade" prefWidth="85.0" text="Maior Idade"/>
+            <TableColumn fx:id="colum_curso" prefWidth="75.0" text="Curso"/>
+            <TableColumn fx:id="colum_sexo" prefWidth="75.0" text="Sexo"/>
+            <TableColumn fx:id="tableColumEDIT" prefWidth="75.0"/>
+            <TableColumn fx:id="tableColumREMOVE" prefWidth="75.0"/>
+        </columns>
+    </TableView>
 </VBox>

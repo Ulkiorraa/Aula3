@@ -1,5 +1,6 @@
 package br.com.ulkiorra.controllers;
 
+import br.com.ulkiorra.DAO.AlunoDAO;
 import br.com.ulkiorra.DAO.CursoDAO;
 import br.com.ulkiorra.Principal;
 import br.com.ulkiorra.util.Alerts;
@@ -19,7 +20,12 @@ import java.util.function.Consumer;
 public class PrincipalController implements Initializable {
 
     @FXML
-    void onMenuItemAlunoAction() { loadView("view/alunoView.fxml", x -> {}); }
+    void onMenuItemAlunoAction() {
+        loadView("view/alunoView.fxml", (AlunoController controller) -> {
+            controller.setAlunoDAO(new AlunoDAO());
+            controller.updateTableView();
+        });
+    }
 
     @FXML
     void onMenuItemCursoAction() {

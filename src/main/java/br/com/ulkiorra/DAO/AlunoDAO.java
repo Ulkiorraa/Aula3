@@ -41,13 +41,20 @@ public class AlunoDAO implements IAlunoDAO {
     @Override
     public Aluno update(Aluno aluno) {
         try (Connection connection = ConnectionFactory.getConnection()) {
-            String query = "UPDATE alunos SET " + "nome = ?, maioridade = ?, curso = ?, sexo = ?" + "WHERE matricula = ?";
+            String query = "UPDATE alunos SET " + "nome = ?, maioridade = ?, curso = ?, sexo = ?, curso_sigla = ?" + "WHERE matricula = ?";
+            String query2 = "SELECT sigla FROM curso WHERE nome = ?";
             PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement2 = connection.prepareStatement(query2);
+            statement2.setString(1, aluno.getCurso());
+            ResultSet resultSet2 = statement2.executeQuery();
+            resultSet2.next();
+            String sigla = resultSet2.getString("sigla");
             statement.setString(1, aluno.getNome());
             statement.setBoolean(2, aluno.isMaioridade());
             statement.setString(3, aluno.getCurso());
             statement.setString(4, aluno.getSexo());
-            statement.setLong(5, aluno.getMatricula());
+            statement.setString(5, sigla);
+            statement.setLong(6, aluno.getMatricula());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -56,11 +63,11 @@ public class AlunoDAO implements IAlunoDAO {
     }
 
     @Override
-    public void delete(Long matricula) {
+    public void delete(Aluno matricula) {
         try (Connection connection = ConnectionFactory.getConnection()) {
             String query = "DELETE FROM alunos WHERE matricula =?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1, matricula);
+            statement.setLong(1, matricula.getMatricula());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

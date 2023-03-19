@@ -114,7 +114,7 @@ public class CursoController implements Initializable, DataChangeListener {
             controller2.updateFormData();
             controller2.subscribeDataChangeListener(this);
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Cadastro de Curso");
+            dialogStage.setTitle("Update de Curso");
             dialogStage.setScene(new Scene(pane));
             dialogStage.setResizable(false);
             dialogStage.initOwner(parentStage);
