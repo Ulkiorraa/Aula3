@@ -54,7 +54,7 @@ public class LoginController {
                     scrollPane.setFitToWidth(true);
                     newScene = new Scene(scrollPane);
                     Stage newStage = new Stage();
-                    newStage.setTitle("Cadastro de Aluno");
+                    newStage.setTitle("Sistema de cadastros");
                     newStage.setScene(newScene);
                     newStage.show();
                     Stage Login_window = (Stage) tela_login.getScene().getWindow();
