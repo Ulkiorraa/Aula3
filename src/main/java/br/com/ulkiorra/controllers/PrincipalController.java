@@ -59,7 +59,7 @@ public class PrincipalController implements Initializable {
             initializeAction.accept(controller);
         } catch (IOException e) {
             Alerts alerts = new Alerts();
-            alerts.mostrarMensagemDeErro("Erro ao carregar tela!", "Erro ao carregar tela About", e.getMessage());
+            alerts.mostrarMensagemDeErro("Erro ao carregar tela!", "Erro ao carregar tela!", e.getMessage());
         }
     }
 }
